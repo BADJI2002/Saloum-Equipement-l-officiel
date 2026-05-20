@@ -614,6 +614,20 @@
     font-size: 1.3rem;
 }
 
+.btn-retour {
+    font-size: 2rem;
+    color: #ff0000;
+    /* rouge par défaut */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.btn-retour:hover {
+    color: #7f87fc;
+    /* bleu au survol */
+}
+
+
 /* ====== Responsive ====== */
 @media (max-width: 768px) {
     .section-title {
@@ -634,7 +648,7 @@
     }
 
     .catalogue {
-        grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(89px, 1fr));
         gap: 0.8rem;
         width: 100%;
         justify-content: center;
