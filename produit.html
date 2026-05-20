@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Saloum Équipement Sport</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo-a">
+            <div class="logo">
+                <img src="photo/S-saloum.png" alt="Logo Saloum Équipement Sport" class="logo-img">
+                Saloum Équipement Sport
+            </div>
+        </a>
+        <div class="cart-icon" onclick="afficherPanier()" style="cursor: pointer;">🛒 <span id="cart-count">0</span>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#produits">Produits</a></li>
+            <li><a href="index.html#galerie">Galerie</a></li>
+            <li><a href="index.html#a-propos">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="burger" id="burger">☰</div>
+    </nav>
+
+
+    <div class="container">
+        <!-- Détail du produit -->
+        <div class="container">
+            <div class="produit-detail">
+                <div class="produit-header">
+                    <a href="index.html#produits" class="btn-retour"><img src="PHOTO/arrow-circle-left_6407369.png" alt="Retour"></a>
+                    <h1 id="nom"></h1>
+                </div>
+
+                <!-- Galerie -->
+                <div class="produit-images">
+                    <img id="image-principale" src="" alt="Produit">
+                    <div class="miniatures">
+                        <img id="image-secondaire1" src="" alt="Produit secondaire">
+                        <img id="image-secondaire2" src="" alt="Produit secondaire">
+                    </div>
+                </div>
+
+                <!-- Zoom -->
+                <div class="zoom" id="zoom">
+                    <span onclick="fermerZoom()">✖</span>
+                    <img id="zoom-img" src="">
+                </div>
+
+                <p id="description"></p>
+                <div class="prix" id="prix"></div>
+
+                <button class="btn-commander" id="btn-commander">Commander</button>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast" class="toast"></div>
+
+        <script src="script.js"></script>
+        <script>
+            // Zoom
+            function ouvrirZoom(src) {
+                document.getElementById('zoom-img').src = src;
+                document.getElementById('zoom').style.display = 'flex';
+            }
+            function fermerZoom() {
+                document.getElementById('zoom').style.display = 'none';
+            }
+
+            // Init produit
+            document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const id = parseInt(params.get("id"));
+
+                const produit = produits.find(p => p.id === id);
+                if (!produit) return;
+
+                const images = produit.images?.length ? produit.images : [produit.image];
+
+                document.getElementById("nom").textContent = produit.nom;
+                document.getElementById("description").textContent = produit.description;
+                document.getElementById("prix").textContent = produit.prix.toLocaleString('fr-FR') + " CFA";
+
+                document.getElementById("image-principale").src = images[0];
+                if (images[1]) document.getElementById("image-secondaire1").src = images[1];
+                if (images[2]) document.getElementById("image-secondaire2").src = images[2];
+
+                document.querySelectorAll(".produit-images img").forEach(img => {
+                    img.addEventListener("click", () => ouvrirZoom(img.src));
+                });
+
+                document.getElementById("btn-commander").onclick = () => {
+                    ajouterAuPanier(id);
+                    showToast(`${produit.nom} ajouté au panier ✅`);
+                    mettreAJourBadge();
+                };
+            });
+        </script>
+
+
+        <!-- Contact -->
+        <section id="contact" class="section-contact">
+            <h2 class="h2-contact">Contactez-Nous</h2>
+            <div class="contacts">
+                <a href="https://wa.me/+221784404796" class="contact-link"><img src="photo/whatsapp-icon.svg"
+                        alt=""></a>
+                <a href="https://www.instagram.com/saloum_equipment_sport/#" class="contact-link" target="_blank"><img
+                        src="photo/instagram-icon.svg" alt=""></a>
+                <a href="https://tiktok.com/@saloum_equipment_" class="contact-link" target="_blank"><img
+                        src="photo/TikTok_light.svg" alt=""></a>
+            </div>
+            <form id="form-contact">
+                <input type="text" name="nom" placeholder="Votre nom" required>
+                <input type="email" name="email" placeholder="Votre email">
+                <textarea name="message" rows="5" placeholder="Votre message ou demande de devis"></textarea>
+                <button type="submit">Envoyer par WhatsApp</button>
+            </form>
+            <div class="groupe-whatsapp">
+                <p>Rejoignez notre groupe WhatsApp</p>
+                <a href="https://chat.whatsapp.com/IAbCPfdNrfe6c84cHWUIdD" class="contact-link"><img
+                        src="photo/whatsapp-icon.svg" alt=""></a>
+            </div>
+        </section>
+        <!-- Fenêtre modale du panier -->
+        <div id="modal-panier" class="modal-panier">
+            <!-- Le contenu sera injecté par afficherPanier() -->
+        </div>
+        <!-- Notification -->
+        <div id="notification" class="notification"></div>
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">Produit ajouté au panier ✅</div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>© 2026 | Conçu et développé par
+                <a href="https://instagram.com/bakary.badji.2002" target="_blank" class="signature">BILEDESIGN</a>
+            </p>
+        </footer>
+
+        <!-- Charger ton script global -->
+
+</body>
+
+</html>

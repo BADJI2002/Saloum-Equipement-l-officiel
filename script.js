@@ -1,252 +1,856 @@
-// Menu hamburger
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
+// ====== Navigation (mobile) ======
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector(".burger");       // bouton burger
+  const navLinks = document.querySelector(".nav-links");  // menu
 
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('show');
+  if (burger && navLinks) {
+    // Toggle menu
+    burger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
     });
+
+    // Fermer le menu quand on clique sur un lien
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+
+    // Fermer si on clique en dehors
+    document.addEventListener("click", (e) => {
+      if (!navLinks.contains(e.target) && !burger.contains(e.target)) {
+        navLinks.classList.remove("show");
+      }
+    });
+  }
 });
 
-// Données des produits
+
+// ====== Données des produits (produit.html + index.html) ======
+// IMPORTANT: garder cette variable dans le scope global.
 const produits = [
-    // Homme / Kimono
+  // Kimono
+  {
+    id: 1,
+    nom: "Kimono simple",
+    description: "Kimono léger et résistant pour entraînement.",
+    prix: 15000,
+    image: "photo/kimono-karate-simple.jpg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono-karate-simple.jpg",
+      "photo/kimono-karate-simple2.jpg",
+      "photo/kimono-karate-simple3.jpg",
+    ],
+  },
+  {
+    id: 23,
+    nom: "kimono Galsen kumite bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 35000,
+    image: "photo/kimono GALSEN kata bleu.jpeg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono GALSEN kata bleu.jpeg",
+      "photo/kimono GALSEN kata bleu1.jpeg",
+      "photo/kimono GALSEN kata bleu2.jpeg",
+    ],
+  },
+  {
+    id: 24,
+    nom: "kimono Galsen kumite rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 35000,
+    image: "photo/kimono GALSEN kata rouge.PNG",
+    categorie: "kimono",
+    images: [
+      "photo/kimono GALSEN kata rouge.PNG",
+      "photo/kimono Galsen.jpeg",
+      "photo/kimono GALSEN kata rouge1.jpeg",
+    ],
+  },
+  {
+    id: 47,
+    nom: "kimono Galsen kumite bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 35000,
+    image: "photo/kimono GALSEN kata bleu.png",
+    categorie: "kimono",
+    images: [
+      "photo/kimono GALSEN kata bleu.png",
+      "photo/kimono GALSEN kata bleu2.PNG",
+      "photo/kimono GALSEN kata bleu3.PNG",
+    ],
+  },
+  {
+    id: 25,
+    nom: "kimono Galsen kumite recto-verso",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 60000,
+    image: "photo/kimono GALSEN kumite recto-verso1.jpeg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono GALSEN kumite recto-verso1.jpeg",
+      "photo/kimono GALSEN kumite recto-verso2.jpeg",
+      "photo/kimono GALSEN kumite recto-verso3.jpeg",
+    ],
+  },
+  {
+    id: 26,
+    nom: "kimono kata arawaza black Diamond",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono kata arawaza black Diamond.webp",
+    categorie: "kimono",
+    images: [
+      "photo/kimono kata arawaza black Diamond.webp",
+      "photo/kimono kata arawaza black Diamond1.jpeg",
+      "photo/kimono kata arawaza black Diamond2.jpeg",
+    ],
+  },
+  {
+    id: 27,
+    nom: "kimono SMA blanc",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono SMA blanc.jpeg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono SMA blanc.jpeg",
+      "photo/kimono SMA blanc1.jpeg",
+      "photo/kimono SMA blanc2.jpeg",
+    ],
+  },
+  {
+    id: 28,
+    nom: "kimono SMA rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono SMA rouge.jpeg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono SMA rouge.jpeg",
+      "photo/kimono SMA rouge1.jpeg",
+      "photo/kimono SMA rouge2.jpeg",
+    ],
+  },
+  {
+    id: 29,
+    nom: "kimono SMAI bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono SMAI bleu.jpeg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono SMAI bleu.jpeg",
+      "photo/kimono SMAI bleu1.jpeg",
+      "photo/kimono SMAI bleu2.jpeg",
+    ],
+  },
+  {
+    id: 30,
+    nom: "kimono tokaido bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono tokaido bleu.jpeg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono tokaido bleu.jpeg",
+      "photo/kimono tokaido bleu1.webp",
+      "photo/kimono tokaido bleu2.webp",
+    ],
+  },
+  {
+    id: 31,
+    nom: "kimono tokaido roure",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono tokaido roure.jpeg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono tokaido roure.jpeg",
+      "photo/kimono tokaido roure1.webp",
+      "photo/kimono tokaido roure2.webp",
+    ],
+  },
+  {
+    id: 40,
+    nom: "kimono-kata-shureidode-bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono-kata-shureidode-bleu.webp",
+    categorie: "kimono",
+    images: [
+      "photo/kimono-kata-shureidode-bleu.webp",
+      "photo/kimono-kata-shureidode-bleu1.jpg",
+      "photo/kimono-kata-shureidode-bleu1.jpg",
+    ],
+  },
+  {
+    id: 41,
+    nom: "kimono-kata-shureidode-rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono-kata-shureidode-rouge.jpg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono-kata-shureidode-rouge.jpg",
+      "photo/kimono-kata-shureidode-rouge1.jpg",
+      "photo/kimono-kata-shureidode-rouge1.jpg",
+    ],
+  },
+
+  // Protection
+  {
+    id: 2,
+    nom: "Gants arawaza simple",
+    description: "Protection optimale pour vos combats.",
+    prix: 9000,
+    image: "photo/gant-arawaza simple blue.jpg",
+    categorie: "protection",
+    images: [
+      "photo/gant-arawaza simple blue.jpg",
+      "photo/gant-arawaza simple blue1.jpg",
+      "photo/gants bleu.png",
+    ],
+  },
+  {
+    id: 5,
+    nom: "Gants smail simple Rouge",
+    description: "Gants résistants pour karaté.",
+    prix: 9000,
+    image: "photo/gants rouge.png",
+    categorie: "protection",
+    images: [
+    "photo/gants rouge.png",
+    "photo/gants rouge.png", 
+    "photo/gants rouge.png"
+    ],
+  },
+  {
+    id: 6,
+    nom: "Casque de Protection",
+    description: "Protection tête lors des combats.",
+    prix: 10000,
+    image: "photo/casque de portection.jpg",
+    categorie: "protection",
+    images: [
+      "photo/casque de portection.jpg",
+      "photo/casque de portection1.jpg",
+      "photo/casque de portection2.jpg",
+    ],
+  },
+  {
+    id: 7,
+    nom: "protege tibia bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 15000,
+    image: "photo/5protege tibia bleu.png",
+    categorie: "protection",
+    images: [
+      "photo/5protege tibia bleu.png",
+      "photo/5protege tibia bleu1.jpeg",
+      "photo/5protege tibia bleu2.jpeg",
+    ],
+  },
+  {
+    id: 16,
+    nom: "gant arawaza 2etiquette bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 9500,
+    image: "photo/gant arawaza 2etiquette bleu.jpg",
+    categorie: "protection",
+    images: [
+      "photo/gant arawaza 2etiquette bleu.jpg",
+      "photo/gant arawaza 2etiquette bleu1.jpeg",
+      "photo/gant arawaza 2etiquette bleu1.webp",
+    ],
+  },
+  {
+    id: 17,
+    nom: "gant smai 2etiquette bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 9500,
+    image: "photo/gant smai 2etiquette bleu.webp",
+    categorie: "protection",
+    images: [
+      "photo/gant smai 2etiquette bleu.webp",
+      "photo/gant smai 2etiquette bleu1.jpeg",
+      "photo/gant smai 2etiquette bleu2.webp",
+    ],
+  },
+  {
+    id: 18,
+    nom: "gant smai 2etiquette rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 9500,
+    image: "photo/gant smai 2etiquette rouge.webp",
+    categorie: "protection",
+    images: [
+      "photo/gant smai 2etiquette rouge.webp",
+      "photo/gant smai 2etiquette rouge1.webp",
+      "photo/gant smai 2etiquette rouge2.webp",
+    ],
+  },
+  {
+    id: 19,
+    nom: "gant-arawaza 2etiquette rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 9500,
+    image: "photo/gant-arawaza 2etiquette rouge.jpg",
+    categorie: "protection",
+    images: [
+      "photo/gant-arawaza 2etiquette rouge.jpg",
+      "photo/gant-arawaza 2etiquette rouge.webp",
+      "photo/gant-arawaza 2etiquette rouge1.webp",
+    ],
+  },
+  {
+    id: 20,
+    nom: "Ceinture arawaza kumité bleu",
+    description: "Ceinture kumite bleu pour compétition.",
+    prix: 3500,
+    image: "photo/CEINTURE-karaté2.jpg",
+    categorie: "protection",
+    images: [
+      "photo/CEINTURE-karaté2.jpg",
+      "photo/CEINTURE-karaté2.jpg",
+      "photo/CEINTURE-karaté.jpg",
+    ],
+  },
+  {
+    id: 21,
+    nom: "gant-arawaza simple rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 9000,
+    image: "photo/gant-arawaza simple rouge.jpg",
+    categorie: "protection",
+    images: [
+      "photo/gant-arawaza simple rouge.jpg",
+      "photo/gant-arawaza simple rouge1.jfif",
+      "photo/gant-arawaza simple rouge2.jpg",
+    ],
+  },
+  {
+    id: 22,
+    nom: "Ceinture arawaza kumité rouge",
+    description: "Ceinture kumite rouge pour compétition.",
+    prix: 3500,
+    image: "photo/CEINTURE-karaté1.jpg",
+    categorie: "protection",
+    images: ["photo/CEINTURE-karaté1.jpg"],
+  },
+
+  // Matériel (exemples)
+  {
+    id: 3,
+    nom: "Sac d'équipement",
+    description: "Idéal pour l'entraînement et compétition.",
+    prix: 10000,
+    image: "photo/SAC DE MATERIEL.jpg",
+    categorie: "materiel",
+    images: [
+      "photo/SAC%20DE%20MATERIEL.jpg",
+      "photo/SAC DE MATERIEL1.jpg",
+      "photo/SAC DE MATERIEL2.jpg",
+    ],
+  },
+  {
+    id: 8,
+    nom: "cible manequin",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 120000,
+    image: "photo/cible manequin.jpeg",
+    categorie: "materiel",
+    images: [
+      "photo/cible manequin.jpeg",
+      "photo/cible manequin.jpeg",
+      "photo/cible manequin.jpeg",
+    ],
+  },
+  {
+    id: 39,
+    nom: "tapis",
+    description: "1 mettre carré de tapis arts martiaux.",
+    prix: 10000,
+    image: "photo/tapis.jpeg",
+    categorie: "materiel",
+    images: [
+      "photo/tapis.jpeg", 
+      "photo/tapis1.jpeg", 
+      "photo/tapis2.jpeg"
+    ],
+  },
+  // Ensemble (exemples)
+  {
+    id: 4,
+    nom: "ensemble Ceinture arawaza",
+    description: "ensemble Ceinture kumite bleu et rouge pour compétition.",
+    prix: 7000,
+    image: "photo/CEINTURE-karaté.jpg",
+    categorie: ["ensemble", "protection"],
+    images: [
+      "photo/CEINTURE-karaté.jpg",
+      "photo/CEINTURE-karaté1.jpg",
+      "photo/CEINTURE-karaté2.jpg",
+    ],
+  },
+  {
+    id: 9,
+    nom: "ensemble kimono kumité smai bleu et rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 100000,
+    image: "photo/ensembe kimono kumité smai.webp",
+    categorie: "ensemble",
+    images: [
+      "photo/ensembe kimono kumité smai.webp",
+      "photo/kimono SMA kumite rouge2.jpeg",
+      "photo/kimono SMA kumite bleu1.jpeg",
+    ],
+  },
+  {
+    id: 10,
+    nom: "ensemble kimono kata arawaza bleu et rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 150000,
+    image: "photo/ensemble kimono kata arawaza bleu et rouge.jpeg",
+    categorie: "ensemble",
+    images: [
+      "photo/ensemble kimono kata arawaza bleu et rouge.jpeg",
+      "photo/ensemble kimono kata arawaza bleu et rouge1.jpeg",
+      "photo/kimono Arawaza-kata rouge.webp",
+    ],
+  },
+
+  // Packs
+  {
+    id: 100,
+    nom: "Pack protection bleu",
+    description: "Protége Tibias + Gants bleu double étiquettes",
+    prix: 25000,
+    image: "photo/001.png",
+    categorie: "ensemble",
+    images: ["photo/001.png"],
+  },
+  {
+    id: 101,
+    nom: "Pack protection rouge",
+    description: "Protége Tibias + Gants rouge double étiquettes",
+    prix: 25000,
+    image: "photo/002.png",
+    categorie: "ensemble",
+    images: ["photo/002.png"],
+  },
+  {
+    id: 102,
+    nom: "Nouvelle Arrivée",
+    description: "Kimono Arawaza black Daimon unique",
+    prix: 75000,
+    image: "photo/003.png",
+    categorie: "ensemble",
+    images: ["photo/003.png"],
+  },
+  {
+    id: 36,
+    nom: "Protege tibia roure",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 15000,
+    image: "photo/protege-tibia-roure.jpeg",
+    categorie: "protection",
+    images: [
+      "photo/protege-tibia-roure.jpeg",
+      "photo/protege-tibia-roure1.jpeg",
+      "photo/protege-tibia-roure2.jpeg"
+    ]
+  },
+  {
+    id: 37,
+    nom: "Protege tibia bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 15000,
+    image: "photo/protege-tibia-bleu.jpeg",
+    categorie: "protection",
+    images: [
+      "photo/protege-tibia-bleu.jpeg",
+      "photo/protege-tibia-bleu1.jpeg",
+      "photo/protege-tibia-bleu2.jpeg"
+    ]
+  },
     {
-        id: 1,
-        nom: "Kimono Karate Blanc - Qualité Pro",
-        categorie: "homme",
-        prix: 25000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.52 (1).jpeg",
-        description: "Kimono qualité compétition, tissu résistant et léger"
+      id: 38,
+      nom: "protège-DENT",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 3000,
+      image: "photo/protège-DENT1.jpg",
+      categorie: "protection",
+      images: [
+        "photo/protège-DENT1.jpg",
+        "photo/protège-DENT.jpg",
+        "photo/protège-DENT.png",
+      ],
+    },
+
+    // Matériel
+    {
+      id: 3,
+      nom: "Sac d'équipement",
+      description: "Idéal pour l'entraînement et compétition.",
+      prix: 10000,
+      image: "photo/SAC%20DE%20MATERIEL.jpg",
+      categorie: "materiel",
+      images: [
+        "photo/SAC DE MATERIEL.jpg",
+        "photo/SAC DE MATERIEL1.jpg",
+        "photo/SAC DE MATERIEL2.jpg",
+      ],
     },
     {
-        id: 2,
-        nom: "Kimono Karate Noir - Premium",
-        categorie: "homme",
-        prix: 28000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.52 (2).jpeg",
-        description: "Kimono noir qualité professionnelle"
+      id: 8,
+      nom: "cible manequin",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 120000,
+      image: "photo/cible manequin.jpeg",
+      categorie: "materiel",
+      images: [
+        "photo/cible manequin.jpeg",
+        "photo/cible manequin.jpeg",
+        "photo/cible manequin.jpeg",
+      ],
     },
     {
-        id: 3,
-        nom: "Kimono Judo - Standard",
-        categorie: "homme",
-        prix: 30000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.52 (3).jpeg",
-        description: "Kimono judo robuste pour entraînement"
+      id: 39,
+      nom: "tapis",
+      description: "1 mettre carré de tapis arts martiaux.",
+      prix: 10000,
+      image: "photo/tapis.jpeg",
+      categorie: "materiel",
+      images: [
+        "photo/tapis.jpeg", 
+        "photo/tapis1.jpeg", 
+        "photo/tapis2.jpeg"
+      ],
+    },
+
+    // Ensemble
+    {
+      id: 9,
+      nom: "ensemble kimono kumité smai bleu et rouge",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 100000,
+      image: "photo/ensembe kimono kumité smai.webp",
+      categorie: "ensemble",
+      images: [
+        "photo/ensembe kimono kumité smai.webp",
+        "photo/kimono SMA kumite rouge2.jpeg",
+        "photo/kimono SMA kumite bleu1.jpeg",
+      ],
     },
     {
-        id: 4,
-        nom: "Ceinture Noire - Karate",
-        categorie: "homme",
-        prix: 5000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.52 (4).jpeg",
-        description: "Ceinture noire en coton qualité"
+      id: 4,
+      nom: "ensemble Ceinture arawaza",
+      description: "ensemble Ceinture kumite bleu et rouge pour compétition.",
+      prix: 7000,
+      image: "photo/CEINTURE-karaté.jpg",
+      categorie: ["ensemble", "protection"],
+      images: [
+        "photo/CEINTURE-karaté.jpg",
+        "photo/CEINTURE-karaté1.jpg",
+        "photo/CEINTURE-karaté2.jpg",
+      ],
     },
     {
-        id: 5,
-        nom: "Ceinture Blanche - Karate",
-        categorie: "homme",
-        prix: 3500,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.52 (5).jpeg",
-        description: "Ceinture blanche coton"
-    },
-    // Femme / Protections
-    {
-        id: 6,
-        nom: "Gants de Boxe - Femme",
-        categorie: "femme",
-        prix: 15000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (1).jpeg",
-        description: "Gants cuir synthétique, plusieurs couleurs"
+      id: 10,
+      nom: "ensemble kimono kata arawaza bleu et rouge",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 150000,
+      image: "photo/ensemble kimono kata arawaza bleu et rouge.jpeg",
+      categorie: "ensemble",
+      images: [
+        "photo/ensemble kimono kata arawaza bleu et rouge.jpeg",
+        "photo/ensemble kimono kata arawaza bleu et rouge1.jpeg",
+        "photo/kimono Arawaza-kata rouge.webp",
+      ],
     },
     {
-        id: 7,
-        nom: "Protège Tibia - Femme",
-        categorie: "femme",
-        prix: 8000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (2).jpeg",
-        description: "Protection tibia et pied mousse"
+      id: 11,
+      nom: "ensemble Kimono Kata SMAI bleu et rouge",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 15000,
+      image: "photo/ensemble Kimono Kata SMAI bleu et rouge.jpg",
+      categorie: "ensemble",
+      images: [
+        "photo/ensemble Kimono Kata SMAI bleu et rouge.jpg",
+        "photo/kimono SMAI bleu1.jpeg",
+        "photo/kimono SMA rouge1.jpeg",
+      ],
     },
     {
-        id: 8,
-        nom: "Casque de Boxe - Femme",
-        categorie: "femme",
-        prix: 12000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (3).jpeg",
-        description: "Casque protection visage"
+      id: 12,
+      nom: "ensemble Kimono Kata tokaido bleu et rouge",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 150000,
+      image: "photo/ensemble Kimono Kata tokaido bleu et rouge.jfif",
+      categorie: "ensemble",
+      images: [
+        "photo/ensemble Kimono Kata tokaido bleu et rouge.jfif",
+        "photo/kimono tokaido roure1.webp",
+        "photo/kimono tokaido bleu1.webp",
+      ],
     },
     {
-        id: 9,
-        nom: "Kimono Femme - Karate",
-        categorie: "femme",
-        prix: 22000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (4).jpeg",
-        description: "Kimono femme coupe spéciale"
-    },
-    // Enfant / Matériel
-    {
-        id: 10,
-        nom: "Kimono Enfant - Karate",
-        categorie: "enfant",
-        prix: 15000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (5).jpeg",
-        description: "Kimono enfant tailles 6-14 ans"
+      id: 13,
+      nom: "ensemble kimono kumite tokaido bleu et rouge",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 100000,
+      image: "photo/ensemble kimono kumite tokaido bleu et rouge.jpg",
+      categorie: "ensemble",
+      images: [
+        "photo/ensemble kimono kumite tokaido bleu et rouge.jpg",
+        "photo/kimono tokaido kumite roure2.webp",
+        "photo/kimono tokaido kumite bleu.webp",
+      ],
     },
     {
-        id: 11,
-        nom: "Gants de Boxe Enfant",
-        categorie: "enfant",
-        prix: 8000,
-        image: "photo/gants_enfant.jpg",
-        description: "Gants enfant légère protection"
+      id: 14,
+      nom: "ensenble kimono kumité arawaza zoro bleu et rouge ",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 105000,
+      image: "photo/ensenble kimono kumité arawaza zoro bleu et rouge.jpeg",
+      categorie: "ensemble",
+      images: [
+        "photo/ensenble kimono kumité arawaza zoro bleu et rouge.jpeg",
+        "photo/ensenble kimono kumité arawaza zoro bleu et rouge1.jpeg",
+        "photo/ensenble kimono kumité arawaza zoro bleu et rouge2.webp",
+      ],
     },
     {
-        id: 12,
-        nom: "Sac de Frappe Enfant",
-        categorie: "enfant",
-        prix: 18000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (6).jpeg",
-        description: "Sac de frappe synthétique"
+      id: 15,
+      nom: "ensenble tibia arawaza bleu et rouge",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 30000,
+      image: "photo/ensenble tibia arawaza bleu et rouge.jpeg",
+      categories: ["ensemble", "protection"],
+      images: [
+        "photo/ensenble tibia arawaza bleu et rouge.jpeg",
+        "photo/ensenble tibia arawaza bleu et rouge1.jpeg",
+        "photo/ensenble tibia arawaza bleu et rouge2.jpeg",
+      ],
     },
     {
-        id: 13,
-        nom: "Protège dents Enfant",
-        categorie: "enfant",
-        prix: 2500,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (7).jpeg",
-        description: "Protège dents thermoformable"
+      id: 42,
+      nom: "ensemble-kimono-shureido-rouge-et-bleue",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 150000,
+      image: "photo/ensemble-kimono-shureido-rouge-et-bleue.jpg",
+      categorie: "ensemble",
+      images: [
+        "photo/ensemble-kimono-shureido-rouge-et-bleue.jpg",
+        "photo/kimono-kata-shureidode-bleu1.jpg",
+        "photo/kimono-kata-shureidode-rouge1.jpg",
+      ],
     },
     {
-        id: 14,
-        nom: "Bandages Boxe - Paire",
-        categorie: "enfant",
-        prix: 2000,
-        image: "photo/WhatsApp Image 2026-04-23 at 10.18.53 (8).jpeg",
-        description: "Bandages protection poignets"
+      id: 43,
+      nom: "ensemble dégresseur unisexe",
+      description: "Équipement de qualité pour arts martiaux.",
+      prix: 10000,
+      image: "photo/ensemble dégresseur unisexe.jpeg",
+      categorie: "ensemble",
+      images: [
+        "photo/ensemble dégresseur unisexe1.JPG",
+        "photo/ensemble dégresseur unisexe1.jpg",
+        "photo/ensemble dégresseur unisexe.jpeg",
+      ],
+    },
+
+    // Ensemble Promotions & Offres Spéciales
+    {
+      id: 100,
+      nom: "Pack protection bleu",
+      description: "Protége Tibias + Gants bleu double étiquettes",
+      prix: 25000,
+      image: "photo/001.png",
+      categorie: "ensemble",
+    },
+    {
+      id: 101,
+      nom: "Pack protection rouge",
+      description: "Protége Tibias + Gants rouge double étiquettes",
+      prix: 25000,
+      image: "photo/002.png",
+      categorie: "ensemble",
+    },
+    {
+      id: 102,
+      nom: "Nouvelle Arrivée",
+      description: "Kimono Arawaza black Daimon unique",
+      prix: 75000,
+      image: "photo/003.png",
+      categorie: "ensemble",
+    },
+  ];
+  // Filtre produits
+  const filterButtons = document.querySelectorAll(".filters button");
+  const cards = document.querySelectorAll(".card");
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Retirer la classe active de tous les boutons
+      filterButtons.forEach((b) => b.classList.remove("active"));
+      // Ajouter la classe active au bouton cliqué
+      btn.classList.add("active");
+
+      const category = btn.dataset.filter;
+
+      cards.forEach((card) => {
+        // Affiche tout si "all" est choisi
+        if (category === "all") {
+          card.style.display = "block";
+        } else {
+          // Affiche uniquement les produits correspondant à la catégorie
+          card.style.display =
+            card.dataset.category === category ? "block" : "none";
+        }
+      });
+    });
+  });
+ // Animation fade-in des produits et galerie au scroll
+function checkElements(selector) {
+  const triggerBottom = window.innerHeight * 0.8;
+  document.querySelectorAll(selector).forEach((el) => {
+    const elTop = el.getBoundingClientRect().top;
+    if (elTop < triggerBottom) {
+      el.classList.add("show");
+    } else {
+      el.classList.remove("show");
     }
-];
-
-// Gestion du panier
-let panier = JSON.parse(localStorage.getItem('panier')) || [];
-
-// Afficher les produits
-function afficherProduits(categorie = 'tous') {
-    const container = document.querySelector('.produits-slider');
-    if (!container) return;
-
-    let produitsFiltres = categorie === 'tous' 
-        ? produits 
-        : produits.filter(p => p.categorie === categorie);
-
-    container.innerHTML = produitsFiltres.map(produit => `
-        <div class="carte-produit">
-            <div class="image-produit">
-                <img src="${produit.image}" alt="${produit.nom}" onerror="this.src='photo/acceuil.png'">
-            </div>
-            <div class="info-produit">
-                <h3>${produit.nom}</h3>
-                <p class="description">${produit.description}</p>
-                <p class="prix">${produit.prix.toLocaleString('fr-FR')} CFA</p>
-                <button onclick="ajouterAuPanier(${produit.id})" class="btn-ajouter">
-                    Ajouter au panier
-                </button>
-            </div>
-        </div>
-    `).join('');
+  });
 }
 
-// Ajouter un produit au panier
-function ajouterAuPanier(id) {
-    const produit = produits.find(p => p.id === id);
+// Vérifier au scroll
+window.addEventListener("scroll", () => {
+  checkElements(".card");           // produits
+  checkElements(".galerie-item");   // galerie
+});
+
+// Au chargement
+window.addEventListener("load", () => {
+  document.querySelectorAll(".card, .galerie-item").forEach((el) => {
+    el.classList.add("show");
+  });
+  mettreAJourBadge();
+});
+
+  // notification
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    // Disparaît après 3 secondes
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000);
+  }
+
+  // Ajouter un produit au panier
+  function ajouterAuPanier(id) {
+    const produit = produits.find((p) => p.id === id);
     if (!produit) return;
 
-    const existant = panier.find(p => p.id === id);
+    const existant = panier.find((p) => p.id === id);
     if (existant) {
-        existant.quantite++;
+      existant.quantite++;
     } else {
-        panier.push({ ...produit, quantite: 1 });
+      panier.push({ ...produit, quantite: 1 });
     }
 
     sauvegarderPanier();
     mettreAJourBadge();
     afficherNotification(`${produit.nom} ajouté au panier!`);
-}
-
-// Supprimer un produit du panier
-function supprimerDuPanier(id) {
-    panier = panier.filter(p => p.id !== id);
+  }
+  let panier = JSON.parse(localStorage.getItem("panier")) || [];
+  // Supprimer un produit du panier
+  function supprimerDuPanier(id) {
+    panier = panier.filter((p) => p.id !== id);
     sauvegarderPanier();
     mettreAJourBadge();
     afficherPanier();
-}
+    showToast("Produit supprimé du panier ❌");
+  }
 
-// Modifier la quantité
-function modifierQuantite(id, changement) {
-    const produit = panier.find(p => p.id === id);
+  // Modifier la quantité
+  function modifierQuantite(id, changement) {
+    const produit = panier.find((p) => p.id === id);
     if (produit) {
-        produit.quantite += changement;
-        if (produit.quantite <= 0) {
-            supprimerDuPanier(id);
-        } else {
-            sauvegarderPanier();
-            afficherPanier();
-        }
+      produit.quantite += changement;
+      if (produit.quantite <= 0) {
+        supprimerDuPanier(id);
+      } else {
+        sauvegarderPanier();
+        afficherPanier();
+      }
     }
     mettreAJourBadge();
-}
+    showToast("Quantité mise à jour 🔄");
+  }
 
-// Sauvegarder le panier
-function sauvegarderPanier() {
-    localStorage.setItem('panier', JSON.stringify(panier));
-}
+  // Sauvegarder le panier
+  function sauvegarderPanier() {
+    localStorage.setItem("panier", JSON.stringify(panier));
+  }
 
-// Mettre à jour le badge
-function mettreAJourBadge() {
-    const badge = document.querySelector('.badge');
+  // Mettre à jour le badge
+  function mettreAJourBadge() {
+    const badge = document.querySelector("#cart-count");
     if (badge) {
-        const total = panier.reduce((sum, p) => sum + p.quantite, 0);
-        badge.textContent = total;
+      const total = panier.reduce((sum, p) => sum + p.quantite, 0);
+      badge.textContent = total;
     }
-}
+  }
 
-// Calculer le total
-function calculerTotal() {
-    return panier.reduce((sum, p) => sum + (p.prix * p.quantite), 0);
-}
+  // Calculer le total
+  function calculerTotal() {
+    return panier.reduce((sum, p) => sum + p.prix * p.quantite, 0);
+  }
 
-// Afficher le panier (modal)
-function afficherPanier() {
-    let modal = document.getElementById('modal-panier');
+  // Afficher le panier (modal)
+  function afficherPanier() {
+    // Définir le panier dès le début
+    let panier = JSON.parse(localStorage.getItem("panier")) || [];
+
+    let modal = document.getElementById("modal-panier");
     if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'modal-panier';
-        modal.className = 'modal-panier';
-        document.body.appendChild(modal);
+      modal = document.createElement("div");
+      modal.id = "modal-panier";
+      modal.className = "modal-panier";
+      document.body.appendChild(modal);
     }
 
     if (panier.length === 0) {
-        modal.innerHTML = `
+      modal.innerHTML = `
             <div class="contenu-panier">
                 <span class="fermer-panier" onclick="fermerPanier()">&times;</span>
                 <h2>Votre Panier</h2>
-                <p class="panier-vide">Votre panier est vide</p>
+                <p class="panier-vide">Votre panier est vide.</p>
                 <button class="btn-continuer" onclick="fermerPanier()">Continuer vos achats</button>
             </div>
         `;
     } else {
-        const total = calculerTotal();
-        modal.innerHTML = `
+      const total = calculerTotal();
+      modal.innerHTML = `
             <div class="contenu-panier">
                 <span class="fermer-panier" onclick="fermerPanier()">&times;</span>
                 <h2>Votre Panier</h2>
                 <div class="liste-panier">
-                    ${panier.map(p => `
+                    ${panier
+                      .map(
+                        (p) => `
                         <div class="item-panier">
-                            <img src="${p.image}" alt="${p.nom}" onerror="this.src='photo/acceuil.png'">
+                            <img src="${p.image}" alt="${p.nom}" onerror="this.src='PHOTO/SAC%20DE%20MATERIEL.jpg'">
                             <div class="details-item">
                                 <h4>${p.nom}</h4>
-                                <p class="prix-item">${p.prix.toLocaleString('fr-FR')} CFA</p>
+                                <p class="prix-item">${p.prix.toLocaleString("fr-FR")} CFA</p>
                             </div>
                             <div class="quantite-controls">
                                 <button onclick="modifierQuantite(${p.id}, -1)">-</button>
@@ -255,10 +859,12 @@ function afficherPanier() {
                             </div>
                             <button class="supprimer-item" onclick="supprimerDuPanier(${p.id})">&times;</button>
                         </div>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                 </div>
                 <div class="total-panier">
-                    <h3>Total: ${total.toLocaleString('fr-FR')} CFA</h3>
+                    <h3>Total: ${total.toLocaleString("fr-FR")} CFA</h3>
                 </div>
                 <button class="btn-commander" onclick="afficherFormulaireCommande()">
                     Passer la commande
@@ -267,35 +873,156 @@ function afficherPanier() {
         `;
     }
 
-    modal.style.display = 'flex';
-}
+    modal.style.display = "flex";
 
-// Fermer le panier
-function fermerPanier() {
-    const modal = document.getElementById('modal-panier');
-    if (modal) modal.style.display = 'none';
-}
+    // Fermer le panier en cliquant à l'extérieur du cadre panier
+    const fermerSurClicExterieur = (e) => {
+      if (
+        modal.style.display === "flex" &&
+        !e.target.closest(".contenu-panier") &&
+        !e.target.closest(".cart-icon")
+      ) {
+        fermerPanier();
+        document.removeEventListener("click", fermerSurClicExterieur);
+      }
+    };
+    setTimeout(
+      () => document.addEventListener("click", fermerSurClicExterieur),
+      100,
+    );
+  }
 
-// Afficher le formulaire de commande
-function afficherFormulaireCommande() {
+  function getTaillesDisponibles(categorie) {
+    if (categorie === "kimono" || categorie === "ensemble") {
+      return ["160", "170", "180", "190", "200"];
+    } else if (categorie === "protection") {
+      return ["M", "L", "XL", "XXL"];
+    } else {
+      return []; // matériel pas de taille
+    }
+  }
+
+  function changerTaille(id, taille) {
+    const produit = panier.find((p) => p.id === id);
+    if (produit) {
+      produit.taille = taille;
+      sauvegarderPanier();
+    }
+  }
+
+  function afficherPanier() {
+    let modal = document.getElementById("modal-panier");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "modal-panier";
+      modal.className = "modal-panier";
+      document.body.appendChild(modal);
+    }
+
+    if (panier.length === 0) {
+      modal.innerHTML = `
+            <div class="contenu-panier">
+                <span class="fermer-panier" onclick="fermerPanier()">&times;</span>
+                <h2>Votre Panier</h2>
+                <button class="btn-continuer" onclick="fermerPanier()">Continuer vos achats</button>
+            </div>
+        `;
+    } else {
+      const total = calculerTotal();
+      modal.innerHTML = `
+            <div class="contenu-panier">
+                <span class="fermer-panier" onclick="fermerPanier()">&times;</span>
+                <h2>Votre Panier</h2>
+                <div class="liste-panier">
+                    ${panier
+                      .map(
+                        (p) => `
+                        <div class="item-panier">
+                            <img src="${p.image}" alt="${p.nom}" onerror="this.src='PHOTO/SAC%20DE%20MATERIEL.jpg'">
+                            <div class="details-item">
+                                <h4>${p.nom}</h4>
+                                <p class="prix-item">${p.prix.toLocaleString("fr-FR")} CFA</p>
+                                ${
+                                  getTaillesDisponibles(p.categorie).length > 0
+                                    ? `
+                                    <label for="taille-${p.id}">Taille :</label>
+                                    <select id="taille-${p.id}" onchange="changerTaille(${p.id}, this.value)">
+                                        <option value="">Choisir</option>
+                                        ${getTaillesDisponibles(p.categorie)
+                                          .map(
+                                            (t) => `
+                                            <option value="${t}" ${p.taille === t ? "selected" : ""}>${t}</option>
+                                        `,
+                                          )
+                                          .join("")}
+                                    </select>
+                                `
+                                    : ""
+                                }
+                            </div>
+                            <div class="quantite-controls">
+                                <button onclick="modifierQuantite(${p.id}, -1)">-</button>
+                                <span>${p.quantite}</span>
+                                <button onclick="modifierQuantite(${p.id}, 1)">+</button>
+                            </div>
+                            <button class="supprimer-item" onclick="supprimerDuPanier(${p.id})">&times;</button>
+                        </div>
+                    `,
+                      )
+                      .join("")}
+                </div>
+                <div class="total-panier">
+                    <h3>Total: ${total.toLocaleString("fr-FR")} CFA</h3>
+                </div>
+                <button class="btn-commander" onclick="afficherFormulaireCommande()">
+                    Passer la commande
+                </button>
+            </div>
+        `;
+    }
+
+    modal.style.display = "flex";
+  }
+
+  // Fermer le panier
+  function fermerPanier() {
+    const modal = document.getElementById("modal-panier");
+    if (modal) modal.style.display = "none";
+  }
+
+  // Afficher le formulaire de commande
+  function afficherFormulaireCommande() {
+    // Vérifier que toutes les tailles sont choisies
+    for (let p of panier) {
+      const tailles = getTaillesDisponibles(p.categorie);
+      if (tailles.length > 0 && !p.taille) {
+        alert(`Veuillez choisir une taille pour le produit : ${p.nom}`);
+        return; // stoppe l'ouverture du formulaire
+      }
+    }
+
     const total = calculerTotal();
-    const modal = document.getElementById('modal-panier');
-    
+    const modal = document.getElementById("modal-panier");
+
     if (modal) {
-        modal.innerHTML = `
+      modal.innerHTML = `
             <div class="contenu-panier contenu-commande">
                 <span class="fermer-panier" onclick="fermerPanier()">&times;</span>
                 <h2>Finaliser votre Commande</h2>
                 <div class="recapitulatif">
                     <h3>Récapitulatif de commande</h3>
-                    ${panier.map(p => `
+                    ${panier
+                      .map(
+                        (p) => `
                         <div class="item-recap">
-                            <span>${p.nom} x${p.quantite}</span>
-                            <span>${(p.prix * p.quantite).toLocaleString('fr-FR')} CFA</span>
+                            <span>${p.nom} ${p.taille ? `(Taille: ${p.taille})` : ""} x${p.quantite}</span>
+                            <span>${(p.prix * p.quantite).toLocaleString("fr-FR")} CFA</span>
                         </div>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                     <div class="total-final">
-                        <strong>Total: ${total.toLocaleString('fr-FR')} CFA</strong>
+                        <strong>Total: ${total.toLocaleString("fr-FR")} CFA</strong>
                     </div>
                 </div>
                 
@@ -338,365 +1065,250 @@ function afficherFormulaireCommande() {
             </div>
         `;
     }
-}
+  }
 
-// Données de commande temporaire pour paiement Wave
-let donneesCommandeTemporaire = null;
-
-// Variable globale pour le paiement en cours
-let paiementWaveEnCours = null;
-
-// Variable pour suivre si le paiement Wave a été effectué
-let paiementWaveEffectue = false;
-
-// Soumettre la commande
-function soumettreCommande(event) {
+  // Soumettre la commande
+  function soumettreCommande(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const formData = new FormData(form);
-    
-    const modePaiement = formData.get('paiement');
+
+    const modePaiement = formData.get("paiement");
     const total = calculerTotal();
-    
-    // Stocker les données de commande temporairement
-    donneesCommandeTemporaire = {
-        nom: formData.get('nom'),
-        telephone: formData.get('telephone'),
-        adresse: formData.get('adresse') || 'Non spécifiée',
-        modePaiement: modePaiement,
-        total: total,
-        articles: [...panier]
+
+    const donnees = {
+      nom: formData.get("nom"),
+      telephone: formData.get("telephone"),
+      adresse: formData.get("adresse") || "Non spécifiée",
+      modePaiement: modePaiement,
+      total: total,
+      articles: [...panier],
     };
-    
-    if (modePaiement === 'wave') {
-        // Paiement Wave - redirection obligatoire
-        afficherInstructionsWave(total);
+
+    // Sauvegarder la commande
+    localStorage.setItem("commande", JSON.stringify(donnees));
+
+    if (modePaiement === "wave") {
+      // Sauvegarder la commande avant de quitter
+      localStorage.setItem("commande", JSON.stringify(donnees));
+      localStorage.setItem("panier", JSON.stringify(panier));
+
+      // Redirection Wave puis retour sur ta page
+      window.location.href =
+        "https://pay.wave.com/m/784404796?redirect_success=https://tonsite.com/paiement-success.html";
     } else {
-        // Paiement à la réception - envoyer directement
-        envoyerCommandeWhatsApp(donneesCommandeTemporaire);
+      envoyerCommandeWhatsApp(donnees);
     }
-}
+  }
 
-// Confirmer le paiement Wave et envoyer la commande
-function confirmerPaiementWave() {
-    if (!donneesCommandeTemporaire) {
-        afficherNotification('Erreur: données de commande manquantes');
-        return;
-    }
-    
-    // Ajouter le statut payé
-    donneesCommandeTemporaire.paye = true;
-    donneesCommandeTemporaire.datePaiement = new Date().toLocaleString('fr-FR');
-    
-    // Envoyer la commande
-    envoyerCommandeWhatsApp(donneesCommandeTemporaire);
-}
-
-// Afficher les instructions de paiement Wave
-function afficherInstructionsWave(total) {
-    const modal = document.getElementById('modal-panier');
-    if (!modal) return;
-    
-    // Réinitialiser le statut de paiement Wave
-    paiementWaveEffectue = false;
-    
-    // Stocker les données pour après paiement
-    window.paiementWaveEnCours = {
-        total: total,
-        donnees: donneesCommandeTemporaire
-    };
-    
-    modal.innerHTML = `
-        <div class="contenu-panier contenu-commande">
-            <span class="fermer-panier" onclick="annulerCommande()">&times;</span>
-            <h2>💳 Paiement Wave</h2>
-            <div class="instructions-wave">
-                <p class="montant-total">Montant à payer: <strong>${total.toLocaleString('fr-FR')} CFA</strong></p>
-                
-                <div class="instructions-paiement">
-                    <h3>🔗 Redirection vers Wave</h3>
-                    <p>Vous allez être redirigé vers l'interface de paiement Wave pour effectuer votre paiement en toute sécurité.</p>
-                    <p class="info-securite">🔒 Paiement sécurisé via Wave</p>
-                </div>
-                
-                <div class="confirmation-wave">
-                    <p>📝 <strong>Important:</strong> Après le paiement, vous serez automatiquement redirigé vers WhatsApp pour confirmer votre commande.</p>
-                    <p class="info-confirmation">Conservez votre reçu de paiement pour la livraison.</p>
-                </div>
-                
-                <a href="https://wave.com/pay/779783473?amount=${total}" target="_blank" class="btn-valider btn-wave-payer" onclick="marquerPaiementWaveEffectue()">
-                    💳 Payer avec Wave
-                </a>
-                
-                <div class="confirmation-apres-paiement">
-                    <p>✅ <strong>Cliquez ici après avoir payé:</strong></p>
-                    <button class="btn-valider btn-confirmer-paiement" id="btn-confirmer-wave" onclick="confirmerApresPaiementWave()" disabled>
-                        ✅ Confirmer le paiement - Valider la commande
-                    </button>
-                    <p class="info-btn-confirmer" id="info-btn-confirmer" style="color: #ff6b6b; font-size: 0.9em; margin-top: 5px;">
-                        ⚠️ Veuillez d'abord cliquer sur "Payer avec Wave" et effectuer le paiement
-                    </p>
-                </div>
-                
-                <button class="btn-annuler" onclick="annulerCommande()">
-                    Annuler
-                </button>
-            </div>
-        </div>
-    `;
-}
-
-// Marquer le paiement Wave comme effectué
-function marquerPaiementWaveEffectue() {
-    paiementWaveEffectue = true;
-    
-    // Activer le bouton de confirmation
-    const btnConfirmer = document.getElementById('btn-confirmer-wave');
-    if (btnConfirmer) {
-        btnConfirmer.disabled = false;
-        btnConfirmer.style.opacity = '1';
-        btnConfirmer.style.cursor = 'pointer';
-    }
-    
-    // Mettre à jour le message d'info
-    const infoBtn = document.getElementById('info-btn-confirmer');
-    if (infoBtn) {
-        infoBtn.innerHTML = '✅ Paiement Wave détecté! Vous pouvez maintenant confirmer votre commande.';
-        infoBtn.style.color = '#51cf66';
-    }
-    
-    afficherNotification('✅ Redirection vers Wave... Effectuez votre paiement.');
-}
-
-// Confirmer après paiement Wave (bouton obligatoire)
-function confirmerApresPaiementWave() {
-    // Vérification stricte: le paiement Wave DOIT être confirmé
-    if (!paiementWaveEffectue) {
-        afficherNotification('❌ Erreur: Veuillez d\'abord effectuer le paiement Wave!');
-        return;
-    }
-    
-    if (!donneesCommandeTemporaire) {
-        afficherNotification('Erreur: données de commande manquantes');
-        return;
-    }
-    
-    // Marquer comme payé via Wave
-    donneesCommandeTemporaire.paye = true;
-    donneesCommandeTemporaire.modePaiement = 'wave';
-    donneesCommandeTemporaire.datePaiement = new Date().toLocaleString('fr-FR');
-    
-    // Envoyer la commande à WhatsApp
-    envoyerCommandeWhatsApp(donneesCommandeTemporaire);
-    
-    // Réinitialiser le statut de paiement
-    paiementWaveEffectue = false;
-}
-
-// Confirmer la paiement Wave et envoyer la commande
-function confirmerPaiementWave() {
-    if (!donneesCommandeTemporaire) {
-        afficherNotification('Erreur: données de commande manquantes');
-        return;
-    }
-    
-    // Vérifier que le paiement a été effectué
-    if (!paiementWaveEffectue) {
-        afficherNotification('❌ Erreur: Veuillez d\'abord effectuer le paiement Wave!');
-        return;
-    }
-    
-    // Ajouter le statut payé
-    donneesCommandeTemporaire.paye = true;
-    donneesCommandeTemporaire.datePaiement = new Date().toLocaleString('fr-FR');
-    
-    // Envoyer la commande
-    envoyerCommandeWhatsApp(donneesCommandeTemporaire);
-    
-    // Réinitialiser le statut de paiement
-    paiementWaveEffectue = false;
-}
-
-function annulerCommande() {
-    donneesCommandeTemporaire = null;
-    fermerPanier();
-    afficherNotification('Commande annulée');
-}
-
-// Configuration UltraMsg (À remplir avec vos données)
-// Allez sur https://ultramsg.com pour obtenir ces informations
-const ULTRAMSG_TOKEN = '35nh7ivngcqyq1mg'; // À remplacer
-const ULTRAMSG_INSTANCE = 'instance171458'; // À remplacer (voir votre dashboard UltraMsg)
-const NUMERO_WHATSAPP_DESTINATAIRE = '+221779783473'; // Votre numéro WhatsApp
-
-// Envoyer la commande via WhatsApp (API UltraMsg)
-function envoyerCommandeWhatsApp(commande) {
-    const { nom, telephone, adresse, modePaiement, total, articles, paye, datePaiement } = commande;
-
-    // Vérification stricte pour Wave: le paiement DOIT être marqué comme payé
-    if (modePaiement === 'wave' && !paye) {
-        afficherNotification('❌ Erreur: La validation Wave est requise avant de passer la commande!');
-        return;
-    }
-
-    // Vérifier que la configuration UltraMsg est complète
-    if (!ULTRAMSG_TOKEN || ULTRAMSG_TOKEN.length < 10 || !ULTRAMSG_INSTANCE || ULTRAMSG_INSTANCE.length < 5) {
-        afficherNotification('⚠️ Configuration UltraMsg incomplète. Vérifiez votre TOKEN et INSTANCE ID.');
-        console.error('Configuration UltraMsg manquante:', { token: ULTRAMSG_TOKEN, instance: ULTRAMSG_INSTANCE });
-        return;
-    }
-
-    // Construire le message pour WhatsApp
-    let message = `*NOUVELLE COMMANDE - SALOUM EQUIPEMENT SPORT*\n\n`;
-    message += `*Client:* ${nom}\n`;
-    message += `*Téléphone:* ${telephone}\n`;
-    message += `*Adresse:* ${adresse}\n\n`;
+  // Envoyer la commande via WhatsApp
+  function envoyerCommandeWhatsApp(donnees) {
+    let message = `*Nouvelle Commande*\n\n`;
+    message += `👤 *Client:* ${donnees.nom}\n`;
+    message += `📞 *Téléphone:* ${donnees.telephone}\n`;
+    message += `📍 *Adresse:* ${donnees.adresse}\n\n`;
     message += `*Articles:*\n`;
 
-    articles.forEach(p => {
-        message += `- ${p.nom} x${p.quantite} = ${(p.prix * p.quantite).toLocaleString('fr-FR')} CFA\n`;
+    donnees.articles.forEach((article) => {
+      message += `• ${article.nom} ${article.taille ? `(Taille: ${article.taille})` : ""} x${article.quantite} - ${(article.prix * article.quantite).toLocaleString("fr-FR")} CFA\n`;
     });
 
-    message += `\n*Total:* ${total.toLocaleString('fr-FR')} CFA\n`;
-    message += `*Mode de paiement:* ${modePaiement === 'wave' ? '💳 Wave (PAYE)' : '🚚 Paiement à la réception'}`;
+    message += `\n💰 *Total:* ${donnees.total.toLocaleString("fr-FR")} CFA`;
 
-    if (paye) {
-        message += `\n*Paiement:* ✅ Confirmé le ${datePaiement}`;
-    }
+    const whatsappUrl = `https://wa.me/+221784404796?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
 
-    // Afficher un message de chargement
-    afficherNotification('⏳ Envoi de votre commande en cours...');
-
-    // Envoyer via l'API UltraMsg
-    envoyerViaUltraMsg(message);
-
-    // Vider le panier
     panier = [];
     sauvegarderPanier();
     mettreAJourBadge();
     fermerPanier();
+    afficherNotification("Commande envoyée!");
+  }
 
-    // Réinitialiser les données temporaires
-    donneesCommandeTemporaire = null;
-}
-
-// Fonction pour envoyer via UltraMsg API
-function envoyerViaUltraMsg(message) {
-    // Format correct pour UltraMsg API
-    const url = `https://api.ultramsg.com/${ULTRAMSG_INSTANCE}/messages/chat`;
-
-    // Créer les données selon la documentation UltraMsg
-    const params = new URLSearchParams({
-        token: ULTRAMSG_TOKEN,
-        to: NUMERO_WHATSAPP_DESTINATAIRE,
-        body: message
-    });
-
-    console.log('Tentative d\'envoi UltraMsg:', {
-        url: url,
-        token: ULTRAMSG_TOKEN.substring(0, 10) + '...', // Masquer le token complet
-        instance: ULTRAMSG_INSTANCE,
-        to: NUMERO_WHATSAPP_DESTINATAIRE,
-        messageLength: message.length
-    });
-
-    // Utiliser fetch avec le bon format
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: params
-    })
-    .then(response => {
-        console.log('Réponse HTTP:', response.status, response.statusText);
-        return response.text(); // D'abord récupérer en texte
-    })
-    .then(text => {
-        console.log('Réponse brute:', text);
-        try {
-            const result = JSON.parse(text);
-            console.log('Réponse JSON:', result);
-
-            if (result.sent || result.success || result.id) {
-                afficherNotification('✅ Commande envoyée avec succès sur WhatsApp!');
-            } else {
-                afficherNotification('❌ Erreur lors de l\'envoi: ' + (result.error || 'Erreur inconnue'));
-                console.error('Erreur UltraMsg détaillée:', result);
-            }
-        } catch (parseError) {
-            console.error('Erreur de parsing JSON:', parseError);
-            afficherNotification('❌ Erreur de réponse du serveur. Vérifiez vos paramètres.');
-        }
-    })
-    .catch(error => {
-        console.error('Erreur réseau détaillée:', error);
-        afficherNotification('❌ Erreur de connexion. Vérifiez votre connexion internet.');
-    });
-}
-
-// Fonction de test pour vérifier la configuration UltraMsg
-function testerUltraMsg() {
-    console.log('=== TEST ULTRAMSG ===');
-    console.log('Token:', ULTRAMSG_TOKEN ? 'Configuré (' + ULTRAMSG_TOKEN.length + ' caractères)' : 'MANQUANT');
-    console.log('Instance:', ULTRAMSG_INSTANCE);
-    console.log('Numéro destinataire:', NUMERO_WHATSAPP_DESTINATAIRE);
-
-    if (!ULTRAMSG_TOKEN || !ULTRAMSG_INSTANCE) {
-        console.error('❌ Configuration incomplète');
-        return;
+  // Afficher notification
+  function afficherNotification(message) {
+    let notification = document.querySelector(".notification");
+    if (!notification) {
+      notification = document.createElement("div");
+      notification.className = "notification";
+      document.body.appendChild(notification);
     }
 
-    // Tester avec un message simple
-    const testMessage = 'Test de configuration UltraMsg - ' + new Date().toLocaleString('fr-FR');
-
-    envoyerViaUltraMsg(testMessage);
-}
-
-// Notification
-function afficherNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
     notification.textContent = message;
-    document.body.appendChild(notification);
-    
+    notification.classList.add("show");
+
     setTimeout(() => {
-        notification.classList.add('show');
-    }, 10);
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
+      notification.classList.remove("show");
     }, 3000);
-}
+  }
 
-// Filtrer par catégorie
-function filtrerParCategorie(categorie) {
-    afficherProduits(categorie);
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.querySelector(".galerie-slider");
+  const images = document.querySelectorAll(".galerie-item img");
 
-// Initialisation
-document.addEventListener('DOMContentLoaded', function() {
-    afficherProduits();
-    mettreAJourBadge();
-    
-    // Gestionnaire pour le lien du panier
-    const lienPanier = document.querySelector('a[href="#panier"]');
-    if (lienPanier) {
-        lienPanier.addEventListener('click', function(e) {
-            e.preventDefault();
-            afficherPanier();
-        });
+  // Lightbox
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const caption = document.getElementById("lightbox-caption");
+  const closeBtn = document.querySelector(".lightbox .close");
+  const prevBtn = document.querySelector(".lightbox .prev");
+  const nextBtn = document.querySelector(".lightbox .next");
+
+  let currentIndex = 0;
+  let scrollAmount = 0;
+
+  // ====== Auto-scroll (carousel) ======
+  function autoScroll() {
+    if (!slider) return;
+    scrollAmount += 220; // largeur image + marge
+    if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+      scrollAmount = 0;
     }
-    
-    // Gestionnaires pour les catégories
-    document.querySelectorAll('[data-categorie]').forEach(lien => {
-        lien.addEventListener('click', function(e) {
-            e.preventDefault();
-            const categorie = this.getAttribute('data-categorie');
-            filtrerParCategorie(categorie);
-            document.getElementById('produits')?.scrollIntoView({ behavior: 'smooth' });
-        });
+    slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+  }
+  setInterval(autoScroll, 9000); // défile toutes les 9s
+
+  // ====== Flèches slider ======
+  const arrowPrev = document.querySelector(".arrow.prev");
+  const arrowNext = document.querySelector(".arrow.next");
+
+  if (arrowPrev && arrowNext && slider) {
+    arrowPrev.addEventListener("click", () => {
+      slider.scrollBy({ left: -220, behavior: "smooth" });
     });
+    arrowNext.addEventListener("click", () => {
+      slider.scrollBy({ left: 220, behavior: "smooth" });
+    });
+  }
+
+  // ====== Lightbox ouverture ======
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+      if (!lightbox) return;
+      lightbox.style.display = "flex";
+      lightboxImg.src = img.src;
+      caption.textContent = img.alt;
+      currentIndex = index;
+    });
+  });
+
+  // ====== Fermeture lightbox ======
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      lightbox.style.display = "none";
+    });
+  }
+
+  // ====== Navigation lightbox ======
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      caption.textContent = images[currentIndex].alt;
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      caption.textContent = images[currentIndex].alt;
+    });
+  }
+
+  // Fermeture si clic en dehors
+  if (lightbox) {
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = "none";
+      }
+    });
+  }
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const promoContainer = document.querySelector(".promo-container");
+  const prevArrow = document.querySelector(".arrow.prev");
+  const nextArrow = document.querySelector(".arrow.next");
+  const dotsContainer = document.querySelector(".dots");
+  const cards = document.querySelectorAll(".promo-card");
+
+  let currentIndex = 0;
+  const cardWidth = 220; // largeur + marge
+  const total = cards.length;
+
+  // Créer les dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.classList.add("dot");
+    if (i === 0) dot.classList.add("active");
+    dot.addEventListener("click", () => scrollToIndex(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateDots() {
+    document.querySelectorAll(".dot").forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentIndex);
+    });
+  }
+
+  function scrollToIndex(index) {
+    currentIndex = index;
+    promoContainer.scrollTo({ left: cardWidth * index, behavior: "smooth" });
+    updateDots();
+  }
+
+  // Flèches navigation
+  prevArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + total) % total;
+    scrollToIndex(currentIndex);
+  });
+  nextArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % total;
+    scrollToIndex(currentIndex);
+  });
+
+  // Swipe mobile
+  let startX = 0;
+  promoContainer.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  promoContainer.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) nextArrow.click();
+    else if (endX - startX > 50) prevArrow.click();
+  });
+
+  // Auto-scroll toutes les 3s
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % total;
+    scrollToIndex(currentIndex);
+  }, 3000);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form-contact");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const nom = form.nom.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    // Numéro WhatsApp de Saloum Équipement
+    const numero = "+221784404796";
+
+    // Construire le texte du message
+    let texte = `*Nouveau message depuis le site*\n\n`;
+    texte += `👤 Nom: ${nom}\n`;
+    if (email) texte += `📧 Email: ${email}\n`;
+    texte += `💬 Message:\n${message}`;
+
+    // Encoder et ouvrir WhatsApp
+    const whatsappUrl = `https://wa.me/${numero}?text=${encodeURIComponent(texte)}`;
+    window.open(whatsappUrl, "_blank");
+  });
+});
+
+
+
+
