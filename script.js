@@ -45,15 +45,15 @@ const produits = [
   },
   {
     id: 23,
-    nom: "kimono Galsen kumite bleu",
+    nom: "kimono arawaza kumite bleu",
     description: "Équipement de qualité pour arts martiaux.",
     prix: 35000,
-    image: "photo/kimono GALSEN kata bleu.jpeg",
+    image: "photo/kimono arawaza kumite bleu.webp",
     categorie: "kimono",
     images: [
-      "photo/kimono GALSEN kata bleu.jpeg",
-      "photo/kimono GALSEN kata bleu1.jpeg",
-      "photo/kimono GALSEN kata bleu2.jpeg",
+      "photo/kimono arawaza kumite bleu.webp",
+      "photo/kimono arawaza kumite bleu1.webp",
+      "photo/kimono arawaza kumite bleu2.png",
     ],
   },
   {
@@ -80,6 +80,32 @@ const produits = [
       "photo/kimono GALSEN kata bleu.png",
       "photo/kimono GALSEN kata bleu2.PNG",
       "photo/kimono GALSEN kata bleu3.PNG",
+    ],
+  },
+  {
+    id: 48,
+    nom: "kimono arawaza kumite rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 35000,
+    image: "photo/kimono arawaza kumite rouge.webp",
+    categorie: "kimono",
+    images: [
+      "photo/kimono arawaza kumite rouge.webp",
+      "photo/kimono arawaza kumite rouge1.jpg",
+      "photo/kimono arawaza kumite rouge2.jpg",
+    ],
+  },
+  {
+    id: 49,
+    nom: "kimono arawaza kumite blanc unique",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 60000,
+    image: "photo/kimono arawaza kumite blanc.png",
+    categorie: "kimono",
+    images: [
+      "photo/kimono arawaza kumite blanc.png",
+      "photo/kimono arawaza kumite blanc1.png",
+      "photo/kimono arawaza kumite blanc2.png",
     ],
   },
   {
@@ -200,6 +226,71 @@ const produits = [
     ],
   },
 
+{
+    id: 44,
+    nom: "kimono tokaido kumite bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image:"photo/kimono tokaido kumite bleu.webp",
+    categorie: "kimono",
+    images: [
+      "photo/kimono tokaido kumite bleu.webp",
+      "photo/kimono tokaido kumite bleu1.webp",
+      "photo/kimono tokaido kumite bleu2.webp",
+    ],
+  },
+  {
+    id: 45,
+    nom: "kimono tokaido kumite rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono tokaido kumite roure.webp",
+    categorie: "kimono",
+    images: [
+      "photo/kimono tokaido kumite roure.webp",
+      "photo/kimono tokaido kumite roure1.webp",
+      "photo/kimono tokaido kumite roure2.webp",
+    ],
+  },
+    {
+    id: 46,
+    nom: "kimono arawaza kumite recto-verso",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 60000,
+    image:"photo/kimono arawaza recto-verso.webp",
+    categorie: "kimono",
+    images: [
+      "photo/kimono arawaza recto-verso.webp",
+      "photo/kimono arawaza recto-verso1.webp",
+      "photo/kimono arawaza kumite recto-verso2.jpeg",
+    ],
+  },
+  {
+    id: 50,
+    nom: "kimono Arawaza-kata-bleu",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono Arawaza-kata-bleu.jpg",
+    categorie: "kimono",
+    images: [
+      "photo/kimono Arawaza-kata-bleu.jpg",
+      "photo/kimono Arawaza-kata-bleu1.webp",
+      "photo/kimono Arawaza-kata-bleu2.webp",
+    ],
+  },
+  {
+    id: 51,
+    nom: "kimono Arawaza-kata-rouge",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 75000,
+    image: "photo/kimono Arawaza-kata rouge.webp",
+    categorie: "kimono",
+    images: [
+      "photo/kimono Arawaza-kata rouge.webp",
+      "photo/kimono Arawaza-kata rouge1.jpg",
+      "photo/kimono Arawaza-kata rouge2.webp",
+    ],
+  },
   // Protection
   {
     id: 2,
@@ -238,6 +329,19 @@ const produits = [
       "photo/casque de portection.jpg",
       "photo/casque de portection1.jpg",
       "photo/casque de portection2.jpg",
+    ],
+  },
+  {
+    id: 52,
+    nom: "coquille de protection karate",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 15000,
+    image: "photo/coquille de protection karate.jpg",
+    categorie: "protection",
+    images: [
+      "photo/coquille de protection karate.jpg",
+      "photo/coquille de protection karate1.JFIF",
+      "photo/coquille de protection karate2.jpg",
     ],
   },
   {
@@ -340,7 +444,59 @@ const produits = [
     categorie: "protection",
     images: ["photo/CEINTURE-karaté1.jpg"],
   },
-
+  
+  {
+    id: 32,
+    nom: "protection pastron femme arawaza",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 15000,
+    image: "photo/protection pastron femme arawaza.jpeg",
+    categorie: "protection",
+    images: [
+      "photo/protection pastron femme arawaza.jpeg",
+      "photo/protection pastron femme arawaza1.jpeg",
+      "photo/protection pastron femme arawaza2.jpg"
+    ]
+  },
+    {
+    id: 33,
+    nom: "protection pastron femme smai",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 15000,
+    image: "photo/protection pastron femme smai.jpeg",
+    categorie: "protection",
+    images: [
+      "photo/protection pastron femme smai.jpeg",
+      "photo/protection pastron femme smai1.jpeg",
+      "photo/protection pastron femme smai12.jpeg"
+    ]
+  },
+    {
+    id: 34,
+    nom: "protege dent onix",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 3000,
+    image: "photo/protege dent onix.jpeg",
+    categorie: "protection",
+    images: [
+      "photo/protege dent onix.jpeg",
+      "photo/protege dent onix1.jpeg",
+      "photo/protege dent onix2.jpeg"
+    ]
+  },
+    {
+    id: 35,
+    nom: "protege plaston homme SMAi",
+    description: "Équipement de qualité pour arts martiaux.",
+    prix: 15000,
+    image: "photo/protege plaston homme SMAi.jpeg",
+    categorie: "protection",
+    images: [
+      "photo/protege plaston homme SMAi.jpeg",
+      "photo/protege plaston homme SMAi1.jpeg",
+      "photo/protege plaston homme SMAi2.jpeg"
+    ]
+  },
   // Matériel (exemples)
   {
     id: 3,
@@ -455,25 +611,26 @@ const produits = [
     nom: "Protege tibia roure",
     description: "Équipement de qualité pour arts martiaux.",
     prix: 15000,
-    image: "photo/protege-tibia-roure.jpeg",
+    image: "photo/protege tibia  roure.jpeg",
     categorie: "protection",
     images: [
-      "photo/protege-tibia-roure.jpeg",
-      "photo/protege-tibia-roure1.jpeg",
-      "photo/protege-tibia-roure2.jpeg"
+      "photo/protege tibia  roure.jpeg",
+      "photo/protege tibia  roure1.jpeg",
+      "photo/protege tibia  roure2.jpeg"
     ]
   },
   {
     id: 37,
     nom: "Protege tibia bleu",
+    nom: "protege tibia bleu",
     description: "Équipement de qualité pour arts martiaux.",
     prix: 15000,
-    image: "photo/protege-tibia-bleu.jpeg",
+    image: "photo/5protege tibia bleu.png",
     categorie: "protection",
     images: [
-      "photo/protege-tibia-bleu.jpeg",
-      "photo/protege-tibia-bleu1.jpeg",
-      "photo/protege-tibia-bleu2.jpeg"
+      "photo/5protege tibia bleu.png",
+      "photo/5protege tibia bleu1.jpeg",
+      "photo/5protege tibia bleu2.jpeg",
     ]
   },
     {
@@ -1226,6 +1383,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const promoContainer = document.querySelector(".promo-container");
   const prevArrow = document.querySelector(".arrow.prev");
@@ -1234,8 +1393,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".promo-card");
 
   let currentIndex = 0;
-  const cardWidth = 220; // largeur + marge
+  const cardWidth = cards[0]?.offsetWidth + 20 || 220; // largeur réelle + marge
   const total = cards.length;
+  let autoScrollInterval;
 
   // Créer les dots
   cards.forEach((_, i) => {
@@ -1254,35 +1414,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function scrollToIndex(index) {
     currentIndex = index;
-    promoContainer.scrollTo({ left: cardWidth * index, behavior: "smooth" });
-    updateDots();
+    promoContainer.scrollTo({
+      left: cardWidth * index,
+      behavior: "smooth"
+    });
+    updateDots(); v 
   }
 
   // Flèches navigation
-  prevArrow.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + total) % total;
-    scrollToIndex(currentIndex);
-  });
-  nextArrow.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % total;
-    scrollToIndex(currentIndex);
-  });
+  if (prevArrow && nextArrow) {
+    prevArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + total) % total;
+      scrollToIndex(currentIndex);
+      pauseAutoScroll();
+    });
+    nextArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % total;
+      scrollToIndex(currentIndex);
+      pauseAutoScroll();
+    });
+  }
 
   // Swipe mobile
   let startX = 0;
-  promoContainer.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  promoContainer.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+  });
   promoContainer.addEventListener("touchend", e => {
     let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) nextArrow.click();
-    else if (endX - startX > 50) prevArrow.click();
+    if (startX - endX > 50) {
+      nextArrow.click();
+    } else if (endX - startX > 50) {
+      prevArrow.click();
+    }
   });
 
-  // Auto-scroll toutes les 3s
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % total;
-    scrollToIndex(currentIndex);
-  }, 3000);
+  // Auto-scroll
+  function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % total;
+      scrollToIndex(currentIndex);
+    }, 9000);
+  }
+
+  function pauseAutoScroll() {
+    clearInterval(autoScrollInterval);
+    // Reprendre après 10s
+    setTimeout(startAutoScroll, 10000);
+  }
+
+  // Pause si souris sur le container
+  promoContainer.addEventListener("mouseenter", pauseAutoScroll);
+  promoContainer.addEventListener("mouseleave", startAutoScroll);
+
+  // Démarrage
+  scrollToIndex(0); // assure que le premier produit est visible
+  startAutoScroll();
 });
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-contact");
