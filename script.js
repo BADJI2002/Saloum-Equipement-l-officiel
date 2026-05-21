@@ -828,6 +828,11 @@ const produits = [
       prix: 25000,
       image: "photo/001.png",
       categorie: "ensemble",
+       images: [
+        "photo/001.png",
+        "photo/5protege tibia bleu.png",
+        "photo/gant arawaza 2etiquette bleu1.webp",
+      ],
     },
     {
       id: 101,
@@ -836,6 +841,11 @@ const produits = [
       prix: 25000,
       image: "photo/002.png",
       categorie: "ensemble",
+      images: [
+        "photo/002.png",
+        "photo/protege tibia  roure.jpeg",
+        "photo/gant-arawaza 2etiquette rouge1.webp",
+      ],
     },
     {
       id: 102,
@@ -844,6 +854,11 @@ const produits = [
       prix: 75000,
       image: "photo/003.png",
       categorie: "ensemble",
+      images: [
+        "photo/003.png",
+        "photo/kimono kata arawaza black Diamond1.jpeg",
+        "photo/kimono kata arawaza black Diamond2.jpeg",
+      ],
     },
   ];
   // Filtre produits
