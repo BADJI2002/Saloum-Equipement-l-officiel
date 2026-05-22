@@ -59,9 +59,7 @@
         </div>
     </div>
 
-    <Div class="SPACER">
-
-    </Div>
+    <div class="SPACER"></div>
     <!-- Toast -->
     <div id="toast" class="toast"></div>
 
@@ -83,11 +81,14 @@
             const produit = produits.find((p) => p.id === id);
             if (!produit) return;
 
-            const images = produit.images?.length ? produit.images : [produit.image];
+            const images = produit.images?.length
+                ? produit.images
+                : [produit.image];
 
             // Infos produit
             document.getElementById("nom").textContent = produit.nom;
-            document.getElementById("description").textContent = produit.description;
+            document.getElementById("description").textContent =
+                produit.description;
             document.getElementById("prix").textContent =
                 produit.prix.toLocaleString("fr-FR") + " CFA";
 
@@ -131,7 +132,7 @@
 
             // Zoom sur l'image principale
             imagePrincipale.addEventListener("click", () =>
-                ouvrirZoom(imagePrincipale.src)
+                ouvrirZoom(imagePrincipale.src),
             );
 
             // Zoom sur miniature (double clic)
@@ -146,8 +147,93 @@
                 mettreAJourBadge();
             };
         });
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = parseInt(params.get("id"));
+
+            const produit = produits.find((p) => p.id === id);
+            if (!produit) return;
+
+            // Filtrer les produits similaires
+            let relatedProducts = produits.filter(
+                (p) => p.categorie === produit.categorie && p.id !== id
+            );
+
+            // ✅ Limiter à 5 produits max
+            relatedProducts = relatedProducts.slice(0, 5);
+
+            const relatedContainer = document.querySelector(".related-container");
+
+            relatedProducts.forEach((p) => {
+                const card = document.createElement("div");
+                card.classList.add("related-card");
+                card.innerHTML = `
+      <a href="produit.html?id=${p.id}">
+        <img src="${p.image}" alt="${p.nom}">
+      </a>
+      <h3>${p.nom}</h3>
+      <p>${p.description}</p>
+      <span class="prix">${p.prix}</span>
+      <button class="add-cart" onclick="ajouterAuPanier(${p.id})">
+        <i class="bi bi-cart-plus"></i> Ajouter
+      </button>
+    `;
+                relatedContainer.appendChild(card);
+            });
+
+            // ✅ Carrousel horizontal
+            let currentIndex = 0;
+            const cardWidth = relatedContainer.querySelector(".related-card")?.offsetWidth + 20 || 220;
+            const total = relatedProducts.length;
+
+            const prevArrow = document.querySelector(".related-section .arrow.prev");
+            const nextArrow = document.querySelector(".related-section .arrow.next");
+            const dotsContainer = document.querySelector(".related-section .dots");
+
+            // Créer les dots
+            relatedProducts.forEach((_, i) => {
+                const dot = document.createElement("span");
+                dot.classList.add("dot");
+                if (i === 0) dot.classList.add("active");
+                dot.addEventListener("click", () => scrollToIndex(i));
+                dotsContainer.appendChild(dot);
+            });
+
+            function updateDots() {
+                document.querySelectorAll(".related-section .dot").forEach((dot, i) => {
+                    dot.classList.toggle("active", i === currentIndex);
+                });
+            }
+
+            function scrollToIndex(index) {
+                currentIndex = index;
+                relatedContainer.scrollTo({
+                    left: cardWidth * index,
+                    behavior: "smooth",
+                });
+                updateDots();
+            }
+
+            prevArrow.addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + total) % total;
+                scrollToIndex(currentIndex);
+            });
+
+            nextArrow.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % total;
+                scrollToIndex(currentIndex);
+            });
+        });
+
     </script>
 
+    <section class="related-section">
+        <h2>Produits similaires</h2>
+        <div class="related-container"></div>
+        <span class="arrow prev">&#10094;</span>
+        <span class="arrow next">&#10095;</span>
+        <div class="dots"></div>
+    </section>
 
 
     <!-- Contact -->

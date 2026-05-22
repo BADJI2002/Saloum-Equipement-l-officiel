@@ -860,7 +860,7 @@ filterButtons.forEach((btn) => {
     if (firstVisibleCard) {
       firstVisibleCard.scrollIntoView({
         behavior: "smooth",
-        block: "start"
+        block: "start",
       });
     }
   });
@@ -1378,7 +1378,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
 document.addEventListener("DOMContentLoaded", () => {
   const promoContainer = document.querySelector(".promo-container");
   const prevArrow = document.querySelector(".arrow.prev");
@@ -1386,87 +1385,51 @@ document.addEventListener("DOMContentLoaded", () => {
   const dotsContainer = document.querySelector(".dots");
   const cards = document.querySelectorAll(".promo-card");
 
-  let currentIndex = 0;
-  const cardWidth = cards[0]?.offsetWidth + 20 || 220; // largeur réelle + marge
-  const total = cards.length;
-  let autoScrollInterval;
+  // ✅ Activer carrousel uniquement sur mobile
+  if (window.innerWidth <= 768) {
+    let currentIndex = 0;
+    const cardWidth = cards[0]?.offsetWidth + 15 || 220;
+    const total = cards.length;
 
-  // Créer les dots
-  cards.forEach((_, i) => {
-    const dot = document.createElement("span");
-    dot.classList.add("dot");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => scrollToIndex(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  function updateDots() {
-    document.querySelectorAll(".dot").forEach((dot, i) => {
-      dot.classList.toggle("active", i === currentIndex);
+    // Créer les dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      if (i === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => scrollToIndex(i));
+      dotsContainer.appendChild(dot);
     });
-  }
 
-  function scrollToIndex(index) {
-    currentIndex = index;
-    promoContainer.scrollTo({
-      left: cardWidth * index,
-      behavior: "smooth",
-    });
-    updateDots();
-    v;
-  }
-
-  // Flèches navigation
-  if (prevArrow && nextArrow) {
-    prevArrow.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + total) % total;
-      scrollToIndex(currentIndex);
-      pauseAutoScroll();
-    });
-    nextArrow.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % total;
-      scrollToIndex(currentIndex);
-      pauseAutoScroll();
-    });
-  }
-
-  // Swipe mobile
-  let startX = 0;
-  promoContainer.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
-  promoContainer.addEventListener("touchend", (e) => {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) {
-      nextArrow.click();
-    } else if (endX - startX > 50) {
-      prevArrow.click();
+    function updateDots() {
+      document.querySelectorAll(".dot").forEach((dot, i) => {
+        dot.classList.toggle("active", i === currentIndex);
+      });
     }
-  });
 
-  // Auto-scroll
-  function startAutoScroll() {
-    autoScrollInterval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % total;
-      scrollToIndex(currentIndex);
-    }, 9000);
+    function scrollToIndex(index) {
+      currentIndex = index;
+      promoContainer.scrollTo({
+        left: cardWidth * index,
+        behavior: "smooth",
+      });
+      updateDots();
+    }
+
+    // Flèches navigation
+    if (prevArrow && nextArrow) {
+      prevArrow.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + total) % total;
+        scrollToIndex(currentIndex);
+      });
+      nextArrow.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % total;
+        scrollToIndex(currentIndex);
+      });
+    }
   }
-
-  function pauseAutoScroll() {
-    clearInterval(autoScrollInterval);
-    // Reprendre après 10s
-    setTimeout(startAutoScroll, 10000);
-  }
-
-  // Pause si souris sur le container
-  promoContainer.addEventListener("mouseenter", pauseAutoScroll);
-  promoContainer.addEventListener("mouseleave", startAutoScroll);
-
-  // Démarrage
-  scrollToIndex(0); // assure que le premier produit est visible
-  startAutoScroll();
 });
 
+// Formulaire de contact
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-contact");
 
