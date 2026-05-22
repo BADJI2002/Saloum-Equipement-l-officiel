@@ -493,6 +493,8 @@
     justify-items: center;
     justify-content: center;
     align-items: center;
+     position: relative; /* ✅ nécessaire pour que sticky fonctionne dans cette section */
+  padding-top: 80px;  /* ajuste selon la hauteur de ta navbar */
 }
 
 .produits-header {
@@ -514,12 +516,21 @@
 
 /* Filtres */
 .filters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  background: #f9f9f9;
+  position: sticky;   /* ✅ reste collé */
+  top: 75px;          /* distance depuis le haut (ajuste selon ta navbar) */
+  width: 100%;       /* prend toute la largeur */
+  padding: 10px;
+  z-index: 999;      /* reste au-dessus des produits */
+  border-bottom: 1px solid #ddd;
+  width: 80%;
 }
+
 
 .filter-btn {
     background: #0044cc;

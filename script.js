@@ -838,19 +838,34 @@ filterButtons.forEach((btn) => {
     btn.classList.add("active");
 
     const category = btn.dataset.filter;
+    let firstVisibleCard = null;
 
     cards.forEach((card) => {
       // Affiche tout si "all" est choisi
       if (category === "all") {
         card.style.display = "block";
+        if (!firstVisibleCard) firstVisibleCard = card;
       } else {
         // Affiche uniquement les produits correspondant à la catégorie
-        card.style.display =
-          card.dataset.category === category ? "block" : "none";
+        if (card.dataset.category === category) {
+          card.style.display = "block";
+          if (!firstVisibleCard) firstVisibleCard = card;
+        } else {
+          card.style.display = "none";
+        }
       }
     });
+
+    // ✅ Ramener au premier produit visible
+    if (firstVisibleCard) {
+      firstVisibleCard.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
   });
 });
+
 // Animation fade-in des produits et galerie au scroll
 function checkElements(selector) {
   const triggerBottom = window.innerHeight * 0.8;
