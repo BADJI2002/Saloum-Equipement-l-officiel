@@ -523,7 +523,7 @@
   margin-bottom: 2rem;
   background: #f9f9f9;
   position: sticky;   /* ✅ reste collé */
-  top: 75px;          /* distance depuis le haut (ajuste selon ta navbar) */
+  
   width: 100%;       /* prend toute la largeur */
   padding: 10px;
   z-index: 999;      /* reste au-dessus des produits */
@@ -654,16 +654,18 @@
 
     .filters {
         gap: 0.5rem;
+        width: 100%;
+         top: 65px;          /* distance depuis le haut (ajuste selon ta navbar) */
     }
 
     .filter-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+        padding: 0.4rem ;
+        font-size: 0.7rem;
     }
 
     .catalogue {
-        grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
-        gap: 0.8rem;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 0.7rem;
         width: 100%;
         justify-content: center;
         text-align: center;
